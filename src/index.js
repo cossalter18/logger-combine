@@ -48,6 +48,7 @@ function* fetchShips(action){
   try{
     const response = yield axios.get( 'https://swapi.dev/api/starships/' );
     console.log('in fetchShips:', response.data);
+    //'put' here is what sagas use to "dispatch" to reducers
     yield put({type: 'blastOff', payload: response.data })
   }catch(err){
     console.log(err);
