@@ -1,4 +1,4 @@
-Combine Reducers, Logger Middleware and Saga
+##Combine Reducers, Logger Middleware and Saga
 
 This repo is an intro to setting up combine reducers, middleware and saga. 
 

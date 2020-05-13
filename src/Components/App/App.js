@@ -2,23 +2,17 @@ import React from 'react';
 import './App.css';
 import { connect } from 'react-redux'
 
-
 class App extends React.Component {
-
-
 
   handleClick = () => {
     console.log('in handleClick');
-    this.props.dispatch({ type: 'test', payload: 'test info' })
+    this.props.dispatch({ type: 'test00', payload: 'test info' })
   }
 
   componentDidMount() {
     console.log(this.props);
+    this.props.dispatch({ type: 'FETCH_STARSHIPS'});
   }
-
-
-
-
 
   render() {
     return (

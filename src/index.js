@@ -7,6 +7,7 @@ import {Provider} from 'react-redux'
 import {createStore, combineReducers, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
 import {takeEvery, put} from 'redux-saga/effects';
+import createSagaMiddleware from 'redux-saga';
 
 const reducerOne=(state=0, action) =>{
  // console.log('in reducerOne', action);
@@ -22,20 +23,32 @@ const reducerTwo=(state='asdf', action) =>{
   return state;
 }
 
+//create sagamiddleware
+const sagaMiddleware = createSagaMiddleware(watcherSaga);
+
 // generator function
 function* watcherSaga(){
 //watcher is going to listen for Saga things
 // generator function so we can do async stuff
 // we will use "yield" in these
+yield takeEvery( 'FETCH_STARSHIPS', fetchShips )
 }//end watcherSaga
 
+function* fetchShips(action){
+  console.log('in fetchShips:', action);
+}
 
+
+function* testSaga(action){
+  console.log('in testSaga', action);
+}
 
 const store = createStore( 
 combineReducers({reducerOne, reducerTwo}),
-applyMiddleware(logger)
+applyMiddleware(logger, sagaMiddleware)
 );
 
+sagaMiddleware.run(watcherSaga)
 
 ReactDOM.render(
   <Provider store={store}>

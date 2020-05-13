@@ -72,12 +72,26 @@
                 SAGAS
 
 [] npm install redux-saga
-[] import saga on index.js
+[] import saga and sagaMiddleware on index.js
+
 
     import {takeEvery, put} from 'redux-saga/effects';
+    import createSagaMiddleware from 'redux-saga;'
+
+[] create sagaMiddleware const
+
+    const sagaMiddleware = createSagaMiddleware();
+
+[] add sagaMiddleware to applyMiddleware()
+
+    applyMiddleware( logger, sagaMiddleware)
 
 [] create generator function in index.js
     
     function* watcherSaga(){
 
     }
+
+[] add watcherSaga to createSagaMiddleware();
+
+    const sagaMiddleware = createSagaMiddleware(watcherSaga);
