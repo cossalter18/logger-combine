@@ -8,6 +8,7 @@ import {createStore, combineReducers, applyMiddleware} from 'redux';
 import logger from 'redux-logger';
 import {takeEvery, put} from 'redux-saga/effects';
 import createSagaMiddleware from 'redux-saga';
+import axios from 'axios';
 
 const reducerOne=(state=0, action) =>{
  // console.log('in reducerOne', action);
@@ -23,6 +24,14 @@ const reducerTwo=(state='asdf', action) =>{
   return state;
 }
 
+const shipReducer=(state=[], action)=>{
+  if(action.type === 'blastOff' ){
+    console.log('in shipReducer', action);
+    state = action.payload;
+  }// end blastOff
+  return state;
+}// end shipReducer
+
 //create sagamiddleware
 const sagaMiddleware = createSagaMiddleware(watcherSaga);
 
@@ -36,15 +45,19 @@ yield takeEvery( 'FETCH_STARSHIPS', fetchShips )
 
 function* fetchShips(action){
   console.log('in fetchShips:', action);
-}
-
-
-function* testSaga(action){
-  console.log('in testSaga', action);
-}
+  try{
+    const response = yield axios.get( 'https://swapi.dev/api/starships/' );
+    console.log('in fetchShips:', response.data);
+    yield put({type: 'blastOff', payload: response.data })
+  }catch(err){
+    console.log(err);
+    alert('error getting ships')
+  }// end try/catch
+  
+}//end fetch
 
 const store = createStore( 
-combineReducers({reducerOne, reducerTwo}),
+combineReducers({reducerOne, reducerTwo, shipReducer}),
 applyMiddleware(logger, sagaMiddleware)
 );
 

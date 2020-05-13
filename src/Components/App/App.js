@@ -22,6 +22,7 @@ class App extends React.Component {
           <p>Reducer One: {this.props.reduxState.reducerOne}</p>
           <p>Reducer Two: {this.props.reduxState.reducerTwo}</p>
           <button onClick={this.handleClick}>Test Dispatch</button>
+          <h3>{JSON.stringify(this.props.reduxState.shipReducer)}</h3>
         </header>
       </div>
 

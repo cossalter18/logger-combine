@@ -95,3 +95,12 @@
 [] add watcherSaga to createSagaMiddleware();
 
     const sagaMiddleware = createSagaMiddleware(watcherSaga);
+
+[] install axios and import to index.js
+
+    npm install axios
+
+    import axios from 'axios';
+
+[]
+
