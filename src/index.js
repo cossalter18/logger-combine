@@ -4,15 +4,37 @@ import './index.css';
 import App from './Components/App/App';
 import * as serviceWorker from './serviceWorker';
 import {Provider} from 'react-redux'
-import {createStore} from 'redux';
+import {createStore, combineReducers, applyMiddleware} from 'redux';
+import logger from 'redux-logger';
+import {takeEvery, put} from 'redux-saga/effects';
 
 const reducerOne=(state=0, action) =>{
-  console.log('in reducerOne', action);
+ // console.log('in reducerOne', action);
   return state;
-  
 }
 
-const store = createStore(reducerOne);
+const reducerTwo=(state='asdf', action) =>{
+  //console.log('in reducerTwo', action);
+  if(action.type === 'test'){
+    console.log('in reducer 2, recieved test action');
+    state = 'tester'
+  }
+  return state;
+}
+
+// generator function
+function* watcherSaga(){
+//watcher is going to listen for Saga things
+// generator function so we can do async stuff
+// we will use "yield" in these
+}//end watcherSaga
+
+
+
+const store = createStore( 
+combineReducers({reducerOne, reducerTwo}),
+applyMiddleware(logger)
+);
 
 
 ReactDOM.render(

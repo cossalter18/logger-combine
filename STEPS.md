@@ -5,7 +5,7 @@
 
 [] create components folders
 [] remove logo from App.js
-[] change App.js to a component 
+[] change App.js to a component in index.js
 
     import App from './Components/App/App';
 
@@ -37,4 +37,47 @@
     const putStateOnProps=(reduxState) =>([reduxState])
     export default connect(putStateOnProps)(App);
 
-[]
+[] npm install redux-logger
+
+    //import into index.js//
+    import logger from 'redux-logger'
+
+[] add combineReducers in with {createStore} index.js
+
+    import {createStore, combineReducers} from 'redux'
+
+[] create second reducer
+
+    const reducerTwo=(state='1', action) =>{
+    console.log('in reducerTwo', action);
+    return state;
+    }
+
+[] add reducers to store in index.js
+
+    const store = createStore( combineReducers({reducerOne, reducerTwo}));
+
+[] apply middleware
+
+    //import with create store and combine reducers//
+    import {createStore, combineReducers, applyMiddleware} from 'redux'
+
+[] add to store index.js
+
+    const store = createStore( 
+    combineReducers({reducerOne, reducerTwo}),
+    applyMiddleware(logger)
+    );
+-------------------------------------------------
+                SAGAS
+
+[] npm install redux-saga
+[] import saga on index.js
+
+    import {takeEvery, put} from 'redux-saga/effects';
+
+[] create generator function in index.js
+    
+    function* watcherSaga(){
+
+    }

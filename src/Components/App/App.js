@@ -3,35 +3,38 @@ import './App.css';
 import { connect } from 'react-redux'
 
 
-class App extends React.Component{
+class App extends React.Component {
 
-  componentDidMount(){
-    console.log(this.props);
-    
+
+
+  handleClick = () => {
+    console.log('in handleClick');
+    this.props.dispatch({ type: 'test', payload: 'test info' })
   }
-render() {
-  return (
-    <div className="App">
-      <header className="App-header">
-       
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  
-  );//end return
-};// end render
+
+  componentDidMount() {
+    console.log(this.props);
+  }
+
+
+
+
+
+  render() {
+    return (
+      <div className="App">
+        <header className="App-header">
+          <p> lamport combine logger</p>
+          <p>Reducer One: {this.props.reduxState.reducerOne}</p>
+          <p>Reducer Two: {this.props.reduxState.reducerTwo}</p>
+          <button onClick={this.handleClick}>Test Dispatch</button>
+        </header>
+      </div>
+
+    );//end return
+  };// end render
 };// end class
 
-const putStateOnProps=(reduxState) =>([reduxState])
+const putStateOnProps = (reduxState) => ({ reduxState })
 
 export default connect(putStateOnProps)(App);
